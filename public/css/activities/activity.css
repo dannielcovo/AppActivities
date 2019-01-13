@@ -1,0 +1,61 @@
+body{
+    font-family: Raleway,sans-serif!important;
+    font-size: 14px!important;
+    line-height: 1.6!important;
+    color: #636b6f!important;
+    background-color: #f5f8fa!important;
+}
+
+.list-activities h1{
+    margin-bottom: 25px ;
+    text-align: center;
+    color: #555;
+}
+
+.activities fieldset{
+    border: solid #c3c3c7;
+    padding: 1.5rem;
+}
+
+.activities legend{
+    text-align: center;
+    border: none;
+    margin-bottom: 0px;
+}
+.list-activities .done{
+    background-color: aquamarine!important;
+}
+
+.activity-content{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.alert{
+    margin-bottom: 10px!important;
+}
+.alert{
+    text-align: center!important;
+    font-size: 18px!important;
+}
+
+ul.alert-danger, ul.alert-success{
+    text-align: left!important;
+}
+.alert-danger li, .alert-success li{
+    margin-left: 10px!important;
+    font-size: 13px!important;
+}
+.btn-create{
+    margin-bottom: 20px!important;
+}
+#form-activity .info-data{
+    display: none;
+}
+.list-activities .modal h4{
+    text-align: center;
+    margin-bottom: 15px;
+}
+.list-activities .modal-name-activity{
+    color: #337ab7;
+    font-size: 16px;
+}
