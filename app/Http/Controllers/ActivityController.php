@@ -135,6 +135,7 @@ class ActivityController extends Controller
 		$messageDefault =[
 			'name.required' => 'Campo Nome não pode ser Vazio',
 			'description.required' => 'Campo Descrição não pode ser Vazio',
+			'description.max:600' => 'O Campo Descrição não deve conter mais de 600 caracteres',
 			'begin_date.required' => 'Campo Data de Inicio não pode ser Vazio',
 			'status_id.required' => 'Campo Status nãi pode ser vazio',
 			'situation.required' => 'Campo Situação não pode ser Vazio',

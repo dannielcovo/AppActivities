@@ -3,13 +3,8 @@
     <div class="row col-md-12 list-activities">
         <h1>Atividades</h1>
         <div class="row">
-            <div class="col-md-3">
-                <a class="btn btn-primary btn-create" type="submit" href="{{route('activities.create')}}">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar Atividade
-                </a>
-            </div>
             <form id="form-search" method="GET">
-                <div class="col-md-3">
+                <div class="col-md-offset-3 col-md-3">
                     <div class="form-group">
                         {{--<label for="situation">Situação</label>--}}
                         <select name="status" class="form-control">
@@ -33,7 +28,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <button class="btn btn-primary btn-create" type="submit" href="" style="width: 100%">
-                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>  Pesquisar
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>  Filtrar
                         </button>
                      </div>
                 </div>
@@ -96,6 +91,11 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="col-md-12 text-center">
+            <a class="btn btn-primary btn-create" type="submit" href="{{route('activities.create')}}">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar Atividade
+            </a>
+        </div>
         <!-- Modal -->
         <div class="modal fade" id="modalDescription" role="dialog">
             <div class="modal-dialog">
@@ -126,7 +126,7 @@
 	DeleteActivity = function (id) {
 		event.preventDefault();
 		$('#form-delete').attr('action', "/activities/"+id);
-		if(confirm('Deseja Excluir esse usuário?')) {
+		if(confirm('Deseja Excluir essa Atividade?')) {
 			$('#form-delete').submit();
 		}
 	}
