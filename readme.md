@@ -1,6 +1,6 @@
-## Para Rodar a aplicação
+## Configurações para executar a aplicação
 
-- configurar o arquivo .env e criar o database respectivo
+- Configurar o arquivo .env e criar o database respectivo
 - Rodar: php artisan migrate 
 - Criar o respectivo stored procedure no Banco de Dados:
 
@@ -11,8 +11,12 @@ BEGIN
 	WHERE activities.id = idx;
 END
 
+- Executar no terminal dentro da pasta raiz do projeto: php artisan serve
+
 ## Sobre o Applicativo
 
+Ferramenta de Desenvolvimento: Laravel Framework;
+Banco de dados: MySql
 Aplicação segue as exigências solicitadas. As validações foram feitas no formulário e no validate do Laravel
 
 ##Author
