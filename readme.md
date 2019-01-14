@@ -2,7 +2,7 @@
 
 - configurar o arquivo .env e criar o database respectivo
 - Rodar: php artisan migrate 
-- Executar Procedure no Banco de Dados:
+- Criar o respectivo stored procedure no Banco de Dados:
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `select_activity_by_id`(IN idx int)
 BEGIN
