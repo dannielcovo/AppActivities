@@ -1,11 +1,45 @@
 @extends('../layouts.layout')
 @section('content')
-    <?php
-    ?>
     <div class="row col-md-12 list-activities">
         <h1>Atividades</h1>
-        <a class="btn btn-primary btn-create" type="submit" href="{{route('activities.create')}}">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar Atividade</a>
+        <div class="row">
+            <div class="col-md-3">
+                <a class="btn btn-primary btn-create" type="submit" href="{{route('activities.create')}}">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar Atividade
+                </a>
+            </div>
+            <form id="form-search" method="GET">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{--<label for="situation">Situação</label>--}}
+                        <select name="status" class="form-control">
+                            <option selected  value="">Selecione um Status</option>
+                            <option {{old('status', $status) == '1' ? 'selected': ''}} value="1">Pendente</option>
+                            <option {{old('status', $status) == '2' ? 'selected': ''}} value="2">Em Desenvolvimento</option>
+                            <option {{old('status', $status) == '3' ? 'selected': ''}} value="3">Em Teste</option>
+                            <option {{old('status', $status) == '4' ? 'selected': ''}} value="4">Concluído</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="situation" placeholder="Escolha a Situação"  class="form-control">
+                            <option value="" selected >Selecione uma Situação</option>
+                            <option {{old('situation', $situation) == 'ativo' ? 'selected': ''}}  value="ativo">Ativo</option>
+                            <option {{old('situation', $situation) == 'inativo' ? 'selected': ''}}  value="inativo">Inativo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-create" type="submit" href="" style="width: 100%">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>  Pesquisar
+                        </button>
+                     </div>
+                </div>
+            </form>
+        </div>
+
         <form id="form-delete" style="display: none" method="post">
             {{csrf_field ()}}
             {{method_field ('DELETE')}}
@@ -19,20 +53,33 @@
                 <td>Data Final</td>
                 <td>Status</td>
                 <td>Situação</td>
-                <td>Ações</td>
+                <td class="text-center">Ações</td>
             </tr>
             </thead>
             <tbody>
                 @forelse($activities as $activity)
-                    <tr class="{{$activity->status == 'Concluído' ? 'done' : ''}}">
+                    @switch($activity->status_id)
+                        @case(1)
+                            @php $status = 'Pendente' @endphp
+                        @break
+                        @case(2)
+                        @php $status = 'Em Desenvolvimento' @endphp
+                        @break
+                        @case(3)
+                        @php $status = 'Em Teste' @endphp
+                        @break
+                        @case(4)
+                        @php $status = 'Concluído' @endphp
+                        @break
+                    @endswitch
+                    <tr class="{{$status == 'Concluído' ? 'done' : ''}}">
                         <td>{{$activity->id}}</td>
                         <td>{{$activity->name}}</td>
                         <td>{{date ('d/m/Y', strtotime($activity->begin_date))}}</td>
                         <td>{{date ('d/m/Y', strtotime($activity->final_date))}}</td>
-                        <td>{{$activity->status}}</td>
+                        <td>{{$status}}</td>
                         <td>{{$activity->situation}}</td>
-                        <td class="actions">
-
+                        <td class="actions text-right">
                             <a class="btn btn-info see" data-description="{{$activity->description}}" data-name="{{$activity->name}}" id="see_description" data-toggle="modal" data-target="#modalDescription" title="Ver" >
                                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver
                             </a>
@@ -77,13 +124,11 @@
 <script>
 
 	DeleteActivity = function (id) {
-		console.log('entrou');
 		event.preventDefault();
 		$('#form-delete').attr('action', "/activities/"+id);
 		if(confirm('Deseja Excluir esse usuário?')) {
 			$('#form-delete').submit();
 		}
 	}
-
 
 </script>

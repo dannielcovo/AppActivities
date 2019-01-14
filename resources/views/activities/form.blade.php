@@ -56,7 +56,7 @@
                                 </select>
                             </div>
                         </div>
-                        @php $stituation =$activity->situation @endphp
+                        @php $stituation = $activity->situation @endphp
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="situation">Situação</label>

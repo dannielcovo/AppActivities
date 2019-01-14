@@ -5,7 +5,7 @@ use App\Activity;
 use Illuminate\Http\Request;
 use App\Status;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\DB;
+
 
 class ActivityController extends Controller
 {
@@ -16,13 +16,22 @@ class ActivityController extends Controller
 		$this->_activity_model = new Activity();
 	}
 
-	public function index(){
-		$activities = $this->allActivity();
+	public function index(Request $request, Activity $activity){
 
-		if(empty($activities))
-			return redirect ()->route('activities.create');
-		else
-			return view('activities.index', compact ('activities', $activities));
+		$status = isset($request->all()['status']) ? $request->all()['status'] : '';
+		$situation = isset($request->all()['situation']) ? $request->all()['situation'] : '' ;
+		if(!empty($request->all())){
+			$dataForm = $request->all();
+			$activities = $activity->search($dataForm);
+			return view('activities.index', compact (['activities', 'status', 'situation'] ));
+		}
+		else {
+			$activities = $activity->allActivity();
+			if(empty($activities))
+				return redirect ()->route('activities.create');
+			else
+				return view('activities.index', compact (['activities', 'status', 'situation']));
+		}
 	}
 
 	public function create(){
@@ -97,8 +106,6 @@ class ActivityController extends Controller
 		return redirect ()->route('activities.index');
 	}
 
-
-
 	private function findActivity($id){
 
 		//chamada procedure atividade by id
@@ -114,11 +121,6 @@ class ActivityController extends Controller
 
 		return $activity;
 
-	}
-
-	private function allActivity(){
-		$activity = DB::select ("select activities.id, name, status, begin_date, final_date, situation, description from activities JOIN statuses on activities.status_id = statuses.id");
-		return $activity;
 	}
 
 	protected function _validate(Request $request){

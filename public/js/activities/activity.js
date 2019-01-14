@@ -2,7 +2,6 @@ $(document).ready(function(){
 	$('.see').on('click', function(){
 		var name = $(this).data('name');
 		var description = $(this).data('description');
-
 		$('#modalDescription .modal-name-activity').html(name);
 		$('#modalDescription .modal-body').html(description);
 	});
@@ -26,7 +25,5 @@ $(document).ready(function(){
 		} else {
 			$('#form-activity').submit()
 		}
-
 	});
-
 })
