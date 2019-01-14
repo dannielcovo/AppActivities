@@ -15,9 +15,10 @@ END
 
 ## Sobre o Applicativo
 
-Ferramenta de Desenvolvimento: Laravel Framework;
-Banco de dados: MySql
-Aplicação segue as exigências solicitadas. As validações foram feitas no formulário e no validate do Laravel
+Ferramenta de Desenvolvimento: 
+- Laravel Framework;
+- Banco de dados: MySql
+- Aplicação segue as exigências solicitadas. As validações foram feitas no formulário e no validate do Laravel
 
 ##Author
 
