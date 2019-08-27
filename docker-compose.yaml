@@ -1,0 +1,123 @@
+#version: '3'
+#services:
+#  #PHP Service
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    image: digitalocean.com/php
+#    container_name: app
+#    restart: unless-stopped
+#    tty: true
+#    environment:
+#      SERVICE_NAME: app
+#      SERVICE_TAGS: dev
+#    working_dir: /var/www
+#    volumes:
+#      - ./:/var/www
+#      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+#    networks:
+#      - app-network
+#  #Nginx Service
+#  webserver:
+#    image: nginx:alpine
+#    container_name: webserver
+#    restart: unless-stopped
+#    tty: true
+#    ports:
+#      - "8000:80"
+#      - "443:443"
+#    volumes:
+#      - ./:/var/www
+#      - ./nginx/conf.d/:/etc/nginx/conf.d/
+#    networks:
+#      - app-network
+#  #MySQL Service
+#  db:
+#    image: mysql:5.7.22
+#    container_name: db
+#    restart: unless-stopped
+#    tty: true
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      MYSQL_DATABASE: app_activities
+#      MYSQL_ROOT_PASSWORD: root
+#      SERVICE_TAGS: dev
+#      SERVICE_NAME: mysqlc
+#    volumes:
+#      - dbdata:/var/lib/mysql/
+#      - ./mysql/my.cnf:/etc/mysql/my.cnf
+#    networks:
+#      - app-network
+##Docker Networks
+#networks:
+#  app-network:
+#    driver: bridge
+##Volumes
+#volumes:
+#  dbdata:
+#    driver: local
+
+
+#version: '2'
+#services:
+#  database:
+#    image: mysql:5.7
+#    volumes:
+#      - .docker/dbdata:/var/lib/mysql
+#    environment:
+#      - "MYSQL_HOST=mysql-app"
+#      - "MYSQL_PORT=3306"
+#      - "MYSQL_DATABASE=app_activities"
+#      - "MYSQL_USERNAME=root"
+#      - "MYSQL_PASSWORD=root"
+#    ports:
+#      - 3306:3306
+#
+#  app:
+#    image: shakyshane/laravel-php:latest
+#    working_dir: /var/www
+#    volumes:
+#      - /var/www/storage
+#    ports:
+#      - "8080:80"
+#    env_file: '.env'
+#    environment:
+#      - "DB_HOST=mysql-app"
+#      - "DB_PORT=3306"
+#      - "REDIS_HOST=cache"
+#    links:
+#      - database
+#    depends_on:
+#      - database
+#
+#
+
+## AULA AO VIVO
+version: '3'
+
+services:
+  laravel-app-docker:
+    build: .
+    ports:
+      - "8081:80"
+    volumes:
+      - ./:/usr/share/nginx
+#    networks:
+#      - app-network
+#  mysql-app:
+#    image: mysql:5.7.22
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - .docker/dbdata:/var/lib/mysql
+#    environment:
+#      MYSQL_DATABASE: app_activities
+#      MYSQL_ROOT_PASSWORD: root
+#    networks:
+#      - app-network
+#networks:
+#  app-network:
+#    driver: bridge
+

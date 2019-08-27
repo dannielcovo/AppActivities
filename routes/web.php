@@ -13,5 +13,13 @@
 
 use Illuminate\Http\Request;
 
-Route::resource('activities', 'ActivityController');
-$this->redirect('/', '/activities', 301);
+
+Route::group(['middleware'=> ['auth', 'tenant']], function (){ // o middleware nesse caso é chamadado antes de qlauqer controlador
+	Route::resource('activities', 'ActivityController');
+	$this->redirect('/', '/activities', 301);
+
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

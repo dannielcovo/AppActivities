@@ -1,4 +1,4 @@
-@extends('../layouts.layout')
+@extends('../layouts.app')
 @section('content')
     <div class="row col-md-12 list-activities">
         <h1>Atividades</h1>

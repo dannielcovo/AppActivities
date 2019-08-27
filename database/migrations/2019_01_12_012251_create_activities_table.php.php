@@ -20,8 +20,10 @@ class CreateActivitiesTable extends Migration
 			$table->date('begin_date')->nullable(false);
 			$table->date('final_date')->nullable();
 			$table->unsignedInteger('status_id');
+			$table->unsignedInteger('user_id');
 			$table->enum('situation', ['Ativo', 'Inativo'] );
 			$table->foreign ('status_id')->references('id')->on('statuses');
+			$table->foreign ('user_id')->references('id')->on('users');
 			$table->timestamps();
 		});
 

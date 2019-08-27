@@ -27,16 +27,16 @@ class ActivityController extends Controller
 		}
 		else {
 			$activities = $activity->allActivity();
-			if(empty($activities))
+			if(empty($activities->toArray ())){
 				return redirect ()->route('activities.create');
+			}
 			else
 				return view('activities.index', compact (['activities', 'status', 'situation']));
 		}
 	}
 
-	public function create(){
+	public function create(Activity $activity){
 		$method = 'POST';
-		$activity = new Activity();
 		$statuses = Status::all();
 		$title = 'Cadastrar Atividade';
 		return view('activities.form',compact ('title', $title, 'statuses', $statuses, 'method', $method, 'activity', $activity));

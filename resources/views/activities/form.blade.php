@@ -1,5 +1,6 @@
-@extends('../layouts.layout')
+@extends('../layouts.app')
 @section('content')
+
     <div class="row col-md-12 activities">
         <form id="form-activity" method="post" action="{{isset($activity->id) ? route('activities.update', $activity->id) : route ('activities.index') }}">
             {!! csrf_field() !!}

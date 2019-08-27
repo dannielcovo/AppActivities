@@ -1,11 +1,14 @@
 <?php
 namespace App;
 
+use App\Tenant\TenantModels;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Activity extends Model
 {
+	use TenantModels;
+
     protected $fillable = [
     	'name',
 		'description',
@@ -13,13 +16,20 @@ class Activity extends Model
 		'final_date',
 		'status_id',
 		'situation',
-		'status_id'
+		'user_id'
 	];
+
+	// adiciono meu tenance scoop
 
 	const ACTIVITY_STATUS = ['Pendente', 'Em Desenvolvimento', 'Em Teste', 'Concluído'];
 
+	public function status(){
+		return $this->belongsTo (Status::class);
+	}
+
 	public function allActivity(){
-		$activity = DB::select ("select activities.id, name, status, begin_date, final_date, situation, description, status_id from activities JOIN statuses on activities.status_id = statuses.id");
+		$activity = Activity::with('status')
+			->get();
 		return $activity;
 	}
 
@@ -32,6 +42,8 @@ class Activity extends Model
 		})
 		->get();
 	}
+
+
 
 }
 
